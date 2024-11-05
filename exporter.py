@@ -222,6 +222,7 @@ if __name__ == '__main__':
 
     no_attendance = args.no_attendance or config.get('no_attendance')
     repair_estimate = args.repair_estimate or config.get('repair_estimate')
+    autosubmit = args.autosubmit or config.get('autosubmit') or 'ask'
 
     if no_attendance:
         odoo_conf = {}
@@ -310,7 +311,12 @@ if __name__ == '__main__':
     ts_state = jira.get_timesheet_state(config['date_window'])
     submit = False
     if ts_state == "OPEN":
-        submit = Utils.ask_submit_timesheet()
+        if autosubmit == 'ask':
+          submit = Utils.ask_submit_timesheet()
+        elif autosubmit == 'always':
+            submit = True
+        elif autosubmit == 'never':
+            submit = False
     if submit:
         cfg_reviewer_key = "tempo_reviewer_id"
         select_reviewer = args.select_reviewer

@@ -9,6 +9,10 @@ odoo_db = awesome_db_name
 odoo_user = my-user
 line_format = standard
 
+# autosubmit can be 'ask' (default) 'never', or 'always'.
+# wether to submit the timesheet after importing gtimesheets into odoo.
+#autosubmit = ask
+
 [gtimelog_exporter:aliases]
 my-alias = ABC-42
 other-alias = XYZ-14
